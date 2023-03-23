@@ -16,8 +16,12 @@ public class CepTemplate {
     }
 
     public ResponseEntity <Cep> buscaInfoCep( String cep ) {
-        String url_viacep= "https://viacep.com.br/ws/" + cep +"/json/";
 
+        if (!cep.matches( "^\\d{8}$" )){
+            return null;
+        }
+
+        String url_viacep= "https://viacep.com.br/ws/" + cep +"/json/";
 
         return restTemplate.getForEntity(url_viacep, Cep.class);
 
